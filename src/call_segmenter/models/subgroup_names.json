@@ -1,0 +1,168 @@
+{
+ "automotive": [
+  {
+   "name": "Compra, financiamento e troca",
+   "anchors": [
+    "credit",
+    "payment",
+    "trade"
+   ]
+  },
+  {
+   "name": "Busca de veículo, cor e test drive",
+   "anchors": [
+    "color",
+    "wheel",
+    "interior"
+   ]
+  },
+  {
+   "name": "Recepção: nome, e-mail e retorno de contato",
+   "anchors": [
+    "email",
+    "sir"
+   ]
+  },
+  {
+   "name": "Agendamento de serviço e manutenção",
+   "anchors": [
+    "appointment",
+    "service",
+    "oil"
+   ]
+  },
+  {
+   "name": "Consulta de VIN e estoque, retorno ao vendedor",
+   "anchors": [
+    "vin",
+    "stock"
+   ]
+  },
+  {
+   "name": "URA e transferência de ramal",
+   "anchors": [
+    "press",
+    "extension"
+   ]
+  }
+ ],
+ "home_service": [
+  {
+   "name": "Controle de fauna silvestre",
+   "anchors": [
+    "wildlife",
+    "animals"
+   ]
+  },
+  {
+   "name": "Agendamento e retorno de visita",
+   "anchors": [
+    "tomorrow",
+    "schedule"
+   ]
+  },
+  {
+   "name": "Vidraçaria residencial: vidro decorativo e box",
+   "anchors": [
+    "decorative",
+    "beautify",
+    "shower"
+   ]
+  },
+  {
+   "name": "Troca de janelas e vidros: orçamento",
+   "anchors": [
+    "window",
+    "pane",
+    "glass"
+   ]
+  },
+  {
+   "name": "Cortesia de encerramento, sem tema dominante",
+   "anchors": [
+    "pleasure",
+    "providing"
+   ]
+  },
+  {
+   "name": "Escritório local: confirmação e pedido de serviço",
+   "anchors": [
+    "office",
+    "confirm",
+    "local"
+   ]
+  },
+  {
+   "name": "Pesquisa de satisfação pós-serviço",
+   "anchors": [
+    "survey",
+    "feedback",
+    "satisfied"
+   ]
+  },
+  {
+   "name": "Vidro automotivo: para-brisa e seguro",
+   "anchors": [
+    "windshield",
+    "insurance",
+    "vehicle"
+   ]
+  }
+ ],
+ "medicare": [
+  {
+   "name": "Consultório humano: novo paciente, convênio e data de nascimento",
+   "anchors": [
+    "insurance",
+    "patient",
+    "birth"
+   ]
+  },
+  {
+   "name": "Pet: creche, banho e reservas",
+   "anchors": [
+    "dog",
+    "boarding",
+    "grooming",
+    "daycare"
+   ]
+  },
+  {
+   "name": "URA e fila de espera de clínicas e consultórios",
+   "anchors": [
+    "press",
+    "holding",
+    "emergency"
+   ]
+  },
+  {
+   "name": "Atendimento em outro idioma, com data de nascimento",
+   "anchors": [
+    "taglanguage",
+    "birth"
+   ]
+  },
+  {
+   "name": "Hospedagem de pets: pacotes e suítes",
+   "anchors": [
+    "suite",
+    "luxury",
+    "package"
+   ]
+  },
+  {
+   "name": "Dúvidas sobre procedimento e lesão (consultório e pet)",
+   "anchors": [
+    "taginjury",
+    "tagdrug"
+   ]
+  },
+  {
+   "name": "Campanhas de clínicas móveis para pets",
+   "anchors": [
+    "clinics",
+    "serving"
+   ]
+  }
+ ]
+}

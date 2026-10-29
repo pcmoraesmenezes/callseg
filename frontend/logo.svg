@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Callseg">
+  <rect width="64" height="64" rx="14" fill="#14202e"/>
+  <g stroke-linecap="round" stroke-width="5">
+    <path d="M14 28v8" stroke="#2a6f97"/>
+    <path d="M22 20v24" stroke="#2a6f97"/>
+    <path d="M30 14v36" stroke="#e07a1f"/>
+    <path d="M38 22v20" stroke="#e07a1f"/>
+    <path d="M46 17v30" stroke="#5a9e6f"/>
+    <path d="M54 27v10" stroke="#5a9e6f"/>
+  </g>
+</svg>

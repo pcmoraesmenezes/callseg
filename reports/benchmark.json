@@ -1,0 +1,960 @@
+{
+ "split": {
+  "desenvolvimento": 8094,
+  "teste": 2027,
+  "dobras": 5
+ },
+ "lazy": [
+  {
+   "model": "RidgeClassifier",
+   "f1_macro": 0.9899701721620883,
+   "accuracy": 0.990117356392835,
+   "seconds": 0.11017489433288574
+  },
+  {
+   "model": "LinearDiscriminantAnalysis",
+   "f1_macro": 0.9899701721620883,
+   "accuracy": 0.990117356392835,
+   "seconds": 5.516990900039673
+  },
+  {
+   "model": "RidgeClassifierCV",
+   "f1_macro": 0.9899701721620883,
+   "accuracy": 0.990117356392835,
+   "seconds": 1.1114299297332764
+  },
+  {
+   "model": "NuSVC",
+   "f1_macro": 0.9894673623310529,
+   "accuracy": 0.9894996911673872,
+   "seconds": 6.019824981689453
+  },
+  {
+   "model": "SVC",
+   "f1_macro": 0.9893450664233795,
+   "accuracy": 0.9894996911673872,
+   "seconds": 3.974433183670044
+  },
+  {
+   "model": "SGDClassifier",
+   "f1_macro": 0.9887681240173384,
+   "accuracy": 0.9888820259419395,
+   "seconds": 0.22893071174621582
+  },
+  {
+   "model": "CalibratedClassifierCV",
+   "f1_macro": 0.9887303304801783,
+   "accuracy": 0.9888820259419395,
+   "seconds": 3.4222066402435303
+  },
+  {
+   "model": "LinearSVC",
+   "f1_macro": 0.987986560856597,
+   "accuracy": 0.9882643607164917,
+   "seconds": 0.8801372051239014
+  },
+  {
+   "model": "Perceptron",
+   "f1_macro": 0.9867915169381819,
+   "accuracy": 0.9870290302655961,
+   "seconds": 0.19226717948913574
+  },
+  {
+   "model": "PassiveAggressiveClassifier",
+   "f1_macro": 0.986745219687633,
+   "accuracy": 0.9870290302655961,
+   "seconds": 0.20271706581115723
+  },
+  {
+   "model": "LogisticRegression",
+   "f1_macro": 0.9863328617201917,
+   "accuracy": 0.9864113650401483,
+   "seconds": 0.8149168491363525
+  },
+  {
+   "model": "QuadraticDiscriminantAnalysis",
+   "f1_macro": 0.9828616000664998,
+   "accuracy": 0.9833230389129092,
+   "seconds": 0.25809526443481445
+  },
+  {
+   "model": "NearestCentroid",
+   "f1_macro": 0.9767031656999294,
+   "accuracy": 0.9765287214329833,
+   "seconds": 0.14619922637939453
+  },
+  {
+   "model": "LGBMClassifier",
+   "f1_macro": 0.9763483079643396,
+   "accuracy": 0.9771463866584311,
+   "seconds": 7.606416463851929
+  },
+  {
+   "model": "ExtraTreesClassifier",
+   "f1_macro": 0.9681382641232191,
+   "accuracy": 0.9697344039530574,
+   "seconds": 1.1446480751037598
+  },
+  {
+   "model": "RandomForestClassifier",
+   "f1_macro": 0.9627503156368156,
+   "accuracy": 0.9641754169240272,
+   "seconds": 9.190907716751099
+  },
+  {
+   "model": "AdaBoostClassifier",
+   "f1_macro": 0.9461244143455881,
+   "accuracy": 0.9474984558369364,
+   "seconds": 11.539012432098389
+  },
+  {
+   "model": "BaggingClassifier",
+   "f1_macro": 0.9430255763084273,
+   "accuracy": 0.9450277949351451,
+   "seconds": 20.773494005203247
+  },
+  {
+   "model": "DecisionTreeClassifier",
+   "f1_macro": 0.934902707777192,
+   "accuracy": 0.9369981470043237,
+   "seconds": 3.2226030826568604
+  },
+  {
+   "model": "BernoulliNB",
+   "f1_macro": 0.9054047095083266,
+   "accuracy": 0.9048795552810377,
+   "seconds": 0.11318802833557129
+  },
+  {
+   "model": "KNeighborsClassifier",
+   "f1_macro": 0.8646146347940412,
+   "accuracy": 0.8709079678814082,
+   "seconds": 0.2019517421722412
+  },
+  {
+   "model": "GaussianNB",
+   "f1_macro": 0.8616531919470832,
+   "accuracy": 0.8610253242742434,
+   "seconds": 0.08034229278564453
+  },
+  {
+   "model": "ExtraTreeClassifier",
+   "f1_macro": 0.7198883075811313,
+   "accuracy": 0.727609635577517,
+   "seconds": 0.07644104957580566
+  },
+  {
+   "model": "DummyClassifier",
+   "f1_macro": 0.19554779572239198,
+   "accuracy": 0.4150710315009265,
+   "seconds": 0.06058907508850098
+  },
+  {
+   "model": "LabelSpreading",
+   "f1_macro": 0.18283894289765476,
+   "accuracy": 0.2958616429894997,
+   "seconds": 2.8414416313171387
+  },
+  {
+   "model": "LabelPropagation",
+   "f1_macro": 0.18283894289765476,
+   "accuracy": 0.2958616429894997,
+   "seconds": 1.4102535247802734
+  }
+ ],
+ "families_cv": [
+  {
+   "model": "Ridge (alpha=1)",
+   "f1_validation": 0.9937914644851693,
+   "std": 0.0013345163941861152,
+   "f1_train": 0.9997960451395297,
+   "fit_seconds": 1.0517333984375
+  },
+  {
+   "model": "SVM linear (C=5)",
+   "f1_validation": 0.993565036610742,
+   "std": 0.0013833416362591974,
+   "f1_train": 1.0,
+   "fit_seconds": 1.0152114391326905
+  },
+  {
+   "model": "SVM linear (C=0.5)",
+   "f1_validation": 0.9926433253338658,
+   "std": 0.0025197230691036765,
+   "f1_train": 0.9997668476899635,
+   "fit_seconds": 0.37953009605407717
+  },
+  {
+   "model": "Regressão logística (C=100)",
+   "f1_validation": 0.9924956477084592,
+   "std": 0.003554285603540591,
+   "f1_train": 1.0,
+   "fit_seconds": 5.094562578201294
+  },
+  {
+   "model": "SGD (perda modified_huber)",
+   "f1_validation": 0.991996076809164,
+   "std": 0.003841970893049275,
+   "f1_train": 1.0,
+   "fit_seconds": 0.18605446815490723
+  },
+  {
+   "model": "Regressão logística (C=5)",
+   "f1_validation": 0.9909241248444618,
+   "std": 0.0032121699249198716,
+   "f1_train": 0.9998251886868819,
+   "fit_seconds": 5.525609064102173
+  },
+  {
+   "model": "Naive Bayes complementar (alpha=0.3)",
+   "f1_validation": 0.9834738060875603,
+   "std": 0.001580710031334535,
+   "f1_train": 0.9929005986875407,
+   "fit_seconds": 0.0283963680267334
+  }
+ ],
+ "wide_random_search": [
+  {
+   "family": "RidgeClassifier",
+   "f1_macro": 0.994172073498469,
+   "std": 0.0015835353605239753,
+   "fit_seconds": 18.23142342567444,
+   "parameters": {
+    "clf__alpha": 0.3524801222067185,
+    "tfidf__max_df": 1.0,
+    "tfidf__max_features": 200000,
+    "tfidf__min_df": 3,
+    "tfidf__ngram_range": [
+     1,
+     3
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "LinearSVC",
+   "f1_macro": 0.9938162203333472,
+   "std": 0.0016431671082443563,
+   "fit_seconds": 15.248859214782716,
+   "parameters": {
+    "clf__C": 4.38571459368943,
+    "tfidf__max_df": 0.5,
+    "tfidf__max_features": 50000,
+    "tfidf__min_df": 2,
+    "tfidf__ngram_range": [
+     1,
+     3
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "LinearSVC",
+   "f1_macro": 0.9938162203333472,
+   "std": 0.0016431671082443563,
+   "fit_seconds": 15.250523710250855,
+   "parameters": {
+    "clf__C": 5.321577060567236,
+    "tfidf__max_df": 0.5,
+    "tfidf__max_features": 50000,
+    "tfidf__min_df": 3,
+    "tfidf__ngram_range": [
+     1,
+     3
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "RidgeClassifier",
+   "f1_macro": 0.9935608262532238,
+   "std": 0.0016717438694626692,
+   "fit_seconds": 11.06008858680725,
+   "parameters": {
+    "clf__alpha": 0.0655622913372467,
+    "tfidf__max_df": 1.0,
+    "tfidf__max_features": 50000,
+    "tfidf__min_df": 2,
+    "tfidf__ngram_range": [
+     1,
+     2
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "SGDClassifier",
+   "f1_macro": 0.9934805051859842,
+   "std": 0.001987597942915781,
+   "fit_seconds": 15.754198265075683,
+   "parameters": {
+    "clf__alpha": 1.7874463256238412e-05,
+    "clf__loss": "hinge",
+    "tfidf__max_df": 0.5,
+    "tfidf__max_features": 200000,
+    "tfidf__min_df": 3,
+    "tfidf__ngram_range": [
+     1,
+     3
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "LinearSVC",
+   "f1_macro": 0.993280309733889,
+   "std": 0.001638994718541063,
+   "fit_seconds": 6.491612911224365,
+   "parameters": {
+    "clf__C": 0.8137266085842503,
+    "tfidf__max_df": 0.8,
+    "tfidf__max_features": 50000,
+    "tfidf__min_df": 3,
+    "tfidf__ngram_range": [
+     1,
+     2
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "SGDClassifier",
+   "f1_macro": 0.99320269570772,
+   "std": 0.0013158477636837948,
+   "fit_seconds": 19.086723804473877,
+   "parameters": {
+    "clf__alpha": 1.4040609919104435e-05,
+    "clf__loss": "hinge",
+    "tfidf__max_df": 0.9,
+    "tfidf__max_features": 50000,
+    "tfidf__min_df": 5,
+    "tfidf__ngram_range": [
+     1,
+     3
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "SGDClassifier",
+   "f1_macro": 0.99261127310902,
+   "std": 0.0018762838087081279,
+   "fit_seconds": 6.708345413208008,
+   "parameters": {
+    "clf__alpha": 1.994916615063394e-06,
+    "clf__loss": "log_loss",
+    "tfidf__max_df": 1.0,
+    "tfidf__max_features": 50000,
+    "tfidf__min_df": 5,
+    "tfidf__ngram_range": [
+     1,
+     2
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "RidgeClassifier",
+   "f1_macro": 0.9925967436332777,
+   "std": 0.0023136782779034424,
+   "fit_seconds": 15.394766187667846,
+   "parameters": {
+    "clf__alpha": 1.9522175911179516,
+    "tfidf__max_df": 0.5,
+    "tfidf__max_features": 50000,
+    "tfidf__min_df": 2,
+    "tfidf__ngram_range": [
+     1,
+     3
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "LinearSVC",
+   "f1_macro": 0.9920794151991471,
+   "std": 0.002328963137008407,
+   "fit_seconds": 20.409516382217408,
+   "parameters": {
+    "clf__C": 0.438569017164028,
+    "tfidf__max_df": 1.0,
+    "tfidf__max_features": 100000,
+    "tfidf__min_df": 2,
+    "tfidf__ngram_range": [
+     1,
+     3
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "LogisticRegression",
+   "f1_macro": 0.991992876166151,
+   "std": 0.0027443118977587325,
+   "fit_seconds": 16.037260389328004,
+   "parameters": {
+    "clf__C": 83.63671316748125,
+    "tfidf__max_df": 0.5,
+    "tfidf__max_features": 50000,
+    "tfidf__min_df": 2,
+    "tfidf__ngram_range": [
+     1,
+     3
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "RidgeClassifier",
+   "f1_macro": 0.9914789066053317,
+   "std": 0.0012027207127575602,
+   "fit_seconds": 23.471402311325072,
+   "parameters": {
+    "clf__alpha": 0.08277653460127117,
+    "tfidf__max_df": 1.0,
+    "tfidf__max_features": 100000,
+    "tfidf__min_df": 3,
+    "tfidf__ngram_range": [
+     1,
+     3
+    ],
+    "tfidf__sublinear_tf": false
+   }
+  },
+  {
+   "family": "SGDClassifier",
+   "f1_macro": 0.9911786914349854,
+   "std": 0.0025522394186828666,
+   "fit_seconds": 7.279533863067627,
+   "parameters": {
+    "clf__alpha": 2.2844556850020545e-06,
+    "clf__loss": "modified_huber",
+    "tfidf__max_df": 0.9,
+    "tfidf__max_features": 50000,
+    "tfidf__min_df": 2,
+    "tfidf__ngram_range": [
+     1,
+     2
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "LogisticRegression",
+   "f1_macro": 0.9911374305966012,
+   "std": 0.0019803230965061277,
+   "fit_seconds": 2.519140911102295,
+   "parameters": {
+    "clf__C": 22.73608087915071,
+    "tfidf__max_df": 0.8,
+    "tfidf__max_features": 200000,
+    "tfidf__min_df": 2,
+    "tfidf__ngram_range": [
+     1,
+     1
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "LinearSVC",
+   "f1_macro": 0.9909828863932073,
+   "std": 0.0024258024908731224,
+   "fit_seconds": 8.775349140167236,
+   "parameters": {
+    "clf__C": 4.891874555031172,
+    "tfidf__max_df": 0.5,
+    "tfidf__max_features": 100000,
+    "tfidf__min_df": 3,
+    "tfidf__ngram_range": [
+     1,
+     2
+    ],
+    "tfidf__sublinear_tf": false
+   }
+  },
+  {
+   "family": "LogisticRegression",
+   "f1_macro": 0.9907456489760135,
+   "std": 0.001965810462285404,
+   "fit_seconds": 2.8962749004364015,
+   "parameters": {
+    "clf__C": 88.84909929476535,
+    "tfidf__max_df": 0.8,
+    "tfidf__max_features": 100000,
+    "tfidf__min_df": 3,
+    "tfidf__ngram_range": [
+     1,
+     1
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "SGDClassifier",
+   "f1_macro": 0.9904647812387685,
+   "std": 0.0014255874963071582,
+   "fit_seconds": 2.169112968444824,
+   "parameters": {
+    "clf__alpha": 0.00028138155131170184,
+    "clf__loss": "hinge",
+    "tfidf__max_df": 0.5,
+    "tfidf__max_features": 200000,
+    "tfidf__min_df": 3,
+    "tfidf__ngram_range": [
+     1,
+     1
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "SGDClassifier",
+   "f1_macro": 0.9901484744895714,
+   "std": 0.002832094102621288,
+   "fit_seconds": 17.169534111022948,
+   "parameters": {
+    "clf__alpha": 3.69997243146381e-05,
+    "clf__loss": "log_loss",
+    "tfidf__max_df": 0.8,
+    "tfidf__max_features": 100000,
+    "tfidf__min_df": 2,
+    "tfidf__ngram_range": [
+     1,
+     3
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "LogisticRegression",
+   "f1_macro": 0.9898940220941859,
+   "std": 0.0023742207132017618,
+   "fit_seconds": 12.397515630722046,
+   "parameters": {
+    "clf__C": 34.056981719938776,
+    "tfidf__max_df": 0.5,
+    "tfidf__max_features": 200000,
+    "tfidf__min_df": 3,
+    "tfidf__ngram_range": [
+     1,
+     2
+    ],
+    "tfidf__sublinear_tf": false
+   }
+  },
+  {
+   "family": "SGDClassifier",
+   "f1_macro": 0.9898328294104809,
+   "std": 0.002645154665754067,
+   "fit_seconds": 6.685057067871094,
+   "parameters": {
+    "clf__alpha": 1.2851782533197036e-05,
+    "clf__loss": "hinge",
+    "tfidf__max_df": 0.9,
+    "tfidf__max_features": 100000,
+    "tfidf__min_df": 2,
+    "tfidf__ngram_range": [
+     1,
+     2
+    ],
+    "tfidf__sublinear_tf": false
+   }
+  },
+  {
+   "family": "SGDClassifier",
+   "f1_macro": 0.9893688393350548,
+   "std": 0.0030369431324211507,
+   "fit_seconds": 15.153657674789429,
+   "parameters": {
+    "clf__alpha": 0.00011018344696523029,
+    "clf__loss": "hinge",
+    "tfidf__max_df": 1.0,
+    "tfidf__max_features": 100000,
+    "tfidf__min_df": 3,
+    "tfidf__ngram_range": [
+     1,
+     3
+    ],
+    "tfidf__sublinear_tf": false
+   }
+  },
+  {
+   "family": "LogisticRegression",
+   "f1_macro": 0.9890736251561527,
+   "std": 0.0023079401825241283,
+   "fit_seconds": 2.5008867263793944,
+   "parameters": {
+    "clf__C": 2.1355597536277013,
+    "tfidf__max_df": 0.5,
+    "tfidf__max_features": 200000,
+    "tfidf__min_df": 3,
+    "tfidf__ngram_range": [
+     1,
+     1
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "LogisticRegression",
+   "f1_macro": 0.9888924545329303,
+   "std": 0.002227049529107143,
+   "fit_seconds": 16.396708393096922,
+   "parameters": {
+    "clf__C": 1.336439260033029,
+    "tfidf__max_df": 1.0,
+    "tfidf__max_features": 200000,
+    "tfidf__min_df": 3,
+    "tfidf__ngram_range": [
+     1,
+     2
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "LinearSVC",
+   "f1_macro": 0.9883753605398533,
+   "std": 0.0026667293492116904,
+   "fit_seconds": 15.704222106933594,
+   "parameters": {
+    "clf__C": 0.09512141623744788,
+    "tfidf__max_df": 1.0,
+    "tfidf__max_features": 50000,
+    "tfidf__min_df": 2,
+    "tfidf__ngram_range": [
+     1,
+     3
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "SGDClassifier",
+   "f1_macro": 0.9872778095413655,
+   "std": 0.003045780207728639,
+   "fit_seconds": 16.838157653808594,
+   "parameters": {
+    "clf__alpha": 1.1117265099859662e-05,
+    "clf__loss": "log_loss",
+    "tfidf__max_df": 1.0,
+    "tfidf__max_features": 50000,
+    "tfidf__min_df": 2,
+    "tfidf__ngram_range": [
+     1,
+     3
+    ],
+    "tfidf__sublinear_tf": false
+   }
+  },
+  {
+   "family": "SGDClassifier",
+   "f1_macro": 0.9864722928520742,
+   "std": 0.0028153865244470904,
+   "fit_seconds": 6.640253210067749,
+   "parameters": {
+    "clf__alpha": 0.0005345166110646819,
+    "clf__loss": "modified_huber",
+    "tfidf__max_df": 1.0,
+    "tfidf__max_features": 100000,
+    "tfidf__min_df": 3,
+    "tfidf__ngram_range": [
+     1,
+     2
+    ],
+    "tfidf__sublinear_tf": false
+   }
+  },
+  {
+   "family": "LogisticRegression",
+   "f1_macro": 0.9861027925341423,
+   "std": 0.0038730941377774194,
+   "fit_seconds": 25.557556915283204,
+   "parameters": {
+    "clf__C": 11.654633855331936,
+    "tfidf__max_df": 1.0,
+    "tfidf__max_features": 100000,
+    "tfidf__min_df": 5,
+    "tfidf__ngram_range": [
+     1,
+     3
+    ],
+    "tfidf__sublinear_tf": false
+   }
+  },
+  {
+   "family": "LinearSVC",
+   "f1_macro": 0.9855926308032702,
+   "std": 0.00326790979298173,
+   "fit_seconds": 2.535197687149048,
+   "parameters": {
+    "clf__C": 0.3432290688432318,
+    "tfidf__max_df": 0.9,
+    "tfidf__max_features": 200000,
+    "tfidf__min_df": 3,
+    "tfidf__ngram_range": [
+     1,
+     1
+    ],
+    "tfidf__sublinear_tf": false
+   }
+  },
+  {
+   "family": "ComplementNB",
+   "f1_macro": 0.9854499632449446,
+   "std": 0.0020835585239827106,
+   "fit_seconds": 2.562761831283569,
+   "parameters": {
+    "clf__alpha": 0.19856496617407673,
+    "tfidf__max_df": 0.5,
+    "tfidf__max_features": 50000,
+    "tfidf__min_df": 2,
+    "tfidf__ngram_range": [
+     1,
+     1
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "LogisticRegression",
+   "f1_macro": 0.9826268624951116,
+   "std": 0.0040766344307498325,
+   "fit_seconds": 3.068426179885864,
+   "parameters": {
+    "clf__C": 4.967944278666236,
+    "tfidf__max_df": 1.0,
+    "tfidf__max_features": 100000,
+    "tfidf__min_df": 2,
+    "tfidf__ngram_range": [
+     1,
+     1
+    ],
+    "tfidf__sublinear_tf": false
+   }
+  },
+  {
+   "family": "LogisticRegression",
+   "f1_macro": 0.9817453050438726,
+   "std": 0.004045855927545125,
+   "fit_seconds": 4.123745441436768,
+   "parameters": {
+    "clf__C": 2.054599206680894,
+    "tfidf__max_df": 0.9,
+    "tfidf__max_features": 50000,
+    "tfidf__min_df": 3,
+    "tfidf__ngram_range": [
+     1,
+     1
+    ],
+    "tfidf__sublinear_tf": false
+   }
+  },
+  {
+   "family": "RidgeClassifier",
+   "f1_macro": 0.9806392746585691,
+   "std": 0.0035388503497663904,
+   "fit_seconds": 26.615574455261232,
+   "parameters": {
+    "clf__alpha": 6.168406154131421,
+    "tfidf__max_df": 1.0,
+    "tfidf__max_features": 100000,
+    "tfidf__min_df": 3,
+    "tfidf__ngram_range": [
+     1,
+     3
+    ],
+    "tfidf__sublinear_tf": false
+   }
+  },
+  {
+   "family": "RidgeClassifier",
+   "f1_macro": 0.9799570514056221,
+   "std": 0.003677790568277767,
+   "fit_seconds": 6.759973573684692,
+   "parameters": {
+    "clf__alpha": 13.124992669799404,
+    "tfidf__max_df": 0.5,
+    "tfidf__max_features": 100000,
+    "tfidf__min_df": 2,
+    "tfidf__ngram_range": [
+     1,
+     1
+    ],
+    "tfidf__sublinear_tf": false
+   }
+  },
+  {
+   "family": "SGDClassifier",
+   "f1_macro": 0.9790512548459317,
+   "std": 0.004679407641057684,
+   "fit_seconds": 2.8060367107391357,
+   "parameters": {
+    "clf__alpha": 0.00013199942261535007,
+    "clf__loss": "log_loss",
+    "tfidf__max_df": 0.9,
+    "tfidf__max_features": 50000,
+    "tfidf__min_df": 5,
+    "tfidf__ngram_range": [
+     1,
+     1
+    ],
+    "tfidf__sublinear_tf": false
+   }
+  },
+  {
+   "family": "LinearSVC",
+   "f1_macro": 0.9790210408045101,
+   "std": 0.003887287810488431,
+   "fit_seconds": 3.0006394386291504,
+   "parameters": {
+    "clf__C": 0.05583014566990671,
+    "tfidf__max_df": 0.8,
+    "tfidf__max_features": 200000,
+    "tfidf__min_df": 5,
+    "tfidf__ngram_range": [
+     1,
+     1
+    ],
+    "tfidf__sublinear_tf": false
+   }
+  },
+  {
+   "family": "LinearSVC",
+   "f1_macro": 0.9777714422939537,
+   "std": 0.00467371400714053,
+   "fit_seconds": 7.2524974822998045,
+   "parameters": {
+    "clf__C": 0.07836547733617708,
+    "tfidf__max_df": 1.0,
+    "tfidf__max_features": 50000,
+    "tfidf__min_df": 3,
+    "tfidf__ngram_range": [
+     1,
+     2
+    ],
+    "tfidf__sublinear_tf": false
+   }
+  },
+  {
+   "family": "ComplementNB",
+   "f1_macro": 0.9734087122497724,
+   "std": 0.0034185044271288394,
+   "fit_seconds": 15.631070184707642,
+   "parameters": {
+    "clf__alpha": 0.026772523169087823,
+    "tfidf__max_df": 0.9,
+    "tfidf__max_features": 50000,
+    "tfidf__min_df": 2,
+    "tfidf__ngram_range": [
+     1,
+     3
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "ComplementNB",
+   "f1_macro": 0.9725773490859684,
+   "std": 0.0029656043527448404,
+   "fit_seconds": 15.735589361190796,
+   "parameters": {
+    "clf__alpha": 0.3472234178078659,
+    "tfidf__max_df": 1.0,
+    "tfidf__max_features": 100000,
+    "tfidf__min_df": 5,
+    "tfidf__ngram_range": [
+     1,
+     3
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  },
+  {
+   "family": "RidgeClassifier",
+   "f1_macro": 0.9704172498506735,
+   "std": 0.0035450184812386557,
+   "fit_seconds": 14.597618579864502,
+   "parameters": {
+    "clf__alpha": 14.886262201211787,
+    "tfidf__max_df": 0.9,
+    "tfidf__max_features": 50000,
+    "tfidf__min_df": 2,
+    "tfidf__ngram_range": [
+     1,
+     3
+    ],
+    "tfidf__sublinear_tf": false
+   }
+  },
+  {
+   "family": "ComplementNB",
+   "f1_macro": 0.9703664939246629,
+   "std": 0.00303171595324508,
+   "fit_seconds": 24.025875854492188,
+   "parameters": {
+    "clf__alpha": 0.16527372553334743,
+    "tfidf__max_df": 0.5,
+    "tfidf__max_features": 50000,
+    "tfidf__min_df": 5,
+    "tfidf__ngram_range": [
+     1,
+     3
+    ],
+    "tfidf__sublinear_tf": true
+   }
+  }
+ ],
+ "test": [
+  {
+   "model": "melhor da busca aleatória",
+   "f1_macro": 0.9930597971501017,
+   "errors": 14,
+   "accuracy": 0.9930932412432166,
+   "ece": 0.00771095645809638
+  },
+  {
+   "model": "SVM linear calibrado",
+   "f1_macro": 0.992099790899054,
+   "errors": 16,
+   "accuracy": 0.992106561420819,
+   "ece": 0.006522748838250041
+  },
+  {
+   "model": "regressão logística",
+   "f1_macro": 0.9915312546925902,
+   "errors": 17,
+   "accuracy": 0.9916132215096202,
+   "ece": 0.05014681171137711
+  },
+  {
+   "model": "combinação (pesos iguais)",
+   "f1_macro": 0.9914569617716126,
+   "errors": 17,
+   "accuracy": 0.9916132215096202,
+   "ece": 0.032860039957706935
+  },
+  {
+   "model": "Naive Bayes complementar",
+   "f1_macro": 0.9842175348043102,
+   "errors": 31,
+   "accuracy": 0.9847064627528367,
+   "ece": 0.028547986225396567
+  },
+  {
+   "model": "MiniLM + regressão logística",
+   "f1_macro": 0.976580550115182,
+   "errors": 47,
+   "accuracy": 0.9768130241736557,
+   "ece": 0.015365939949813444
+  },
+  {
+   "model": "DistilBERT com ajuste fino",
+   "f1_macro": 0.9643421351365368,
+   "errors": 68,
+   "accuracy": 0.9664528860384806,
+   "ece": 0.011843053516520652
+  }
+ ]
+}

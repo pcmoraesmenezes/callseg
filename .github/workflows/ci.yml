@@ -1,0 +1,64 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.7.12"
+          enable-cache: true
+      - run: uv sync --frozen --extra dev
+      - run: uv run ruff check src backend tests tools airflow
+      - name: Dependências sem vulnerabilidade conhecida
+        run: |
+          uv export --frozen --no-dev --no-hashes --no-emit-project > /tmp/runtime-requirements.txt
+          uv run pip-audit -r /tmp/runtime-requirements.txt --no-deps --disable-pip
+      - name: Nenhum dado, modelo ou segredo no git
+        run: "! git ls-files | grep -E '^(data|models)/|(^|/)\\.env$'"
+      - run: uv run pytest -q
+
+  image:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.7.12"
+      - run: |
+          uv sync --frozen --extra dev
+          mkdir -p models
+          uv run python tools/build_fixture_model.py models/segmenter.joblib
+          cp .env.example .env
+      - name: Sobe a pilha e testa ponta a ponta
+        run: |
+          docker compose up -d --build --wait
+          curl -fsS localhost:8010/health
+          curl -fsS localhost:8010/segment -H 'Content-Type: application/json' \
+            -d '{"text": "dog pet boarding grooming daycare vaccine puppy suite reservation leash"}' | tee out.json
+          python3 -c "import json; assert json.load(open('out.json'))['sector'] == 'medicare'"
+          sleep 2
+          docker compose exec -T db sh -c 'PGPASSWORD="$BI_PASSWORD" psql -U bi_reader -d "$POSTGRES_DB" -c "DELETE FROM ops.predictions"' 2>&1 | grep -q "permission denied"
+          docker compose exec -T db sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -tAc "SELECT count(*) FROM ops.predictions WHERE source = '"'"'api'"'"'"' | grep -qx 1
+          docker compose exec -T db sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -tAc "SELECT count(*) FROM information_schema.tables WHERE table_type = '"'"'BASE TABLE'"'"' AND table_schema IN ('"'"'bronze'"'"', '"'"'silver'"'"', '"'"'gold'"'"', '"'"'ops'"'"')"' | grep -qx 12
+      - name: Consulta de deriva roda no PostgreSQL de verdade
+        run: |
+          docker compose exec -T api python -c "import os; from call_segmenter.warehouse import PredictionRepository, create_db_engine, create_session_factory; print(PredictionRepository(create_session_factory(create_db_engine(os.environ['DATABASE_URL']))).window(60))"
+      - name: Varredura de vulnerabilidades da imagem
+        run: |
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.75.0 \
+            image --severity CRITICAL --ignore-unfixed --exit-code 1 --no-progress call-segmenter-api:local
+      - if: failure()
+        run: docker compose logs
+      - if: always()
+        run: docker compose down -v

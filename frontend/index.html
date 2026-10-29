@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Callseg: setor e subgrupo de cada chamada</title>
+  <meta name="description" content="Cole a transcrição de uma chamada de call center e veja o setor e o tipo de atendimento.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <img src="logo.svg" alt="" width="40" height="40">
+    <div>
+      <h1>Callseg</h1>
+      <p>Setor e subgrupo de cada chamada de call center</p>
+    </div>
+    <a class="docs-link" href="../docs">Documentação da API</a>
+  </header>
+
+  <main>
+    <section class="card" aria-labelledby="input-title">
+      <h2 id="input-title">Transcrição</h2>
+      <div class="dropzone" id="dropzone">
+        <textarea id="transcript" placeholder="Cole aqui a transcrição completa da chamada" aria-label="Transcrição da chamada"></textarea>
+        <p class="hint">Ou arraste para cá o arquivo da chamada (.json do conjunto de dados, só o campo <code>text</code> é lido; ou .txt).
+          <label class="file-button">Escolher arquivo<input type="file" id="file-input" accept=".json,.txt,application/json,text/plain" hidden></label>
+        </p>
+      </div>
+      <div class="actions">
+        <button class="primary" id="segment-button">Segmentar</button>
+        <span class="muted">Exemplos:</span>
+        <button data-sample="pet">Hospedagem de pet</button>
+        <button data-sample="glass">Para-brisa</button>
+        <button data-sample="car">Financiamento de carro</button>
+      </div>
+    </section>
+
+    <section class="card" id="result" hidden aria-live="polite">
+      <h2>Setor</h2>
+      <div id="sector-bars"></div>
+      <h2>Subgrupo dentro do setor</h2>
+      <div class="subgroup-name" id="subgroup-name"></div>
+      <p class="muted" id="subgroup-detail"></p>
+      <div id="evidence" class="chips"></div>
+      <p class="muted" id="meta"></p>
+    </section>
+
+    <section class="card error" id="error" hidden role="alert"><span id="error-text"></span></section>
+
+    <section class="card" id="recent-card" hidden>
+      <h2>Últimas segmentações</h2>
+      <p class="muted">Só metadados. O texto da chamada nunca é guardado.</p>
+      <table>
+        <thead><tr><th>Quando</th><th>Setor</th><th>Subgrupo</th><th>Prob.</th></tr></thead>
+        <tbody id="recent-rows"></tbody>
+      </table>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

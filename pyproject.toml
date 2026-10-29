@@ -1,0 +1,60 @@
+[project]
+name = "call-segmenter"
+version = "0.2.0"
+description = "Segmentação de transcrições de call center em setor e subgrupo"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy", "pandas", "scipy", "scikit-learn", "joblib", "pyarrow",
+    "fastapi", "uvicorn", "pydantic", "prometheus-client",
+    "sqlalchemy", "psycopg[binary]", "alembic",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "httpx", "ruff", "pre-commit", "pip-audit"]
+notebook = [
+    "matplotlib", "seaborn", "nbformat", "nbclient", "ipykernel", "python-pptx",
+    "lazypredict", "umap-learn", "lightgbm", "xgboost",
+    "torch", "transformers", "sentence-transformers",
+]
+mlops = ["mlflow==3.10.1"]
+
+[project.scripts]
+callseg = "call_segmenter.cli:main"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"call_segmenter.models" = ["subgroup_names.json"]
+"call_segmenter.warehouse" = ["migrations/*.mako", "migrations/versions/*.py"]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.ruff]
+line-length = 120
+src = ["src", "backend", "tests", "pipelines"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["fastapi.Depends", "fastapi.Query"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/call_segmenter/warehouse/migrations/versions/*.py" = ["E501"]
+"tools/*.py" = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["backend"]
+markers = ["latency: mede tempo de resposta e pode ser mais lento"]

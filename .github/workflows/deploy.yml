@@ -1,0 +1,28 @@
+name: deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag da imagem, por exemplo 0.2.0"
+        required: true
+
+concurrency: deploy
+
+jobs:
+  server:
+    runs-on: [self-hosted, callseg]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sobe a versão pedida
+        env:
+          TAG: ${{ inputs.tag }}
+        run: |
+          set -a; . "$HOME/.callseg.env"; set +a
+          compose="docker compose -p callseg --env-file $HOME/.callseg.env -f docker-compose.yml -f deploy/compose.prod.yml"
+          $compose pull api
+          $compose --profile bi up -d --wait
+      - name: Confere a versão no ar
+        run: |
+          set -a; . "$HOME/.callseg.env"; set +a
+          curl -fsS "http://127.0.0.1:${API_PORT}/health"

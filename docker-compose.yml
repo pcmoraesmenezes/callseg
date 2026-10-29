@@ -1,0 +1,222 @@
+name: call-segmenter
+
+# Perfis: sem perfil sobem db, migrate e api. `pipeline` roda uma etapa do ciclo do modelo (make ingest, train...).
+# `bi` sobe Metabase e a página inicial, `mlops` o MLflow, `orchestration` o Airflow.
+
+x-hardening: &hardening
+  security_opt: ["no-new-privileges:true"]
+  cap_drop: ["ALL"]
+
+x-database-url: &database-url postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    mem_limit: 512m
+    restart: unless-stopped
+
+  migrate:
+    build:
+      context: .
+      dockerfile: docker/api.Dockerfile
+    image: call-segmenter-api:local
+    depends_on:
+      db: {condition: service_healthy}
+    command: ["callseg", "migrate"]
+    environment:
+      DATABASE_URL: *database-url
+      BI_PASSWORD: ${BI_PASSWORD}
+    restart: "no"
+
+  api:
+    <<: *hardening
+    image: call-segmenter-api:local
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    environment:
+      DATABASE_URL: *database-url
+      SHADOW_MODEL_PATH: ${SHADOW_MODEL_PATH:-}
+    volumes:
+      - ./models:/models:ro
+    ports:
+      - "127.0.0.1:${API_PORT:-8010}:8000"
+    read_only: true
+    tmpfs: ["/tmp"]
+    mem_limit: 768m
+    restart: unless-stopped
+
+  pipeline:
+    image: call-segmenter-api:local
+    profiles: ["pipeline"]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    entrypoint: ["callseg"]
+    working_dir: /srv
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
+    environment:
+      DATABASE_URL: *database-url
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID:-}
+    volumes:
+      - ./data:/srv/data:ro
+      - ./models:/srv/models
+      - ./reports:/srv/reports:ro
+    mem_limit: 4g
+
+  metabase:
+    <<: *hardening
+    image: metabase/metabase:v0.58.38
+    profiles: ["bi"]
+    user: "2000:2000"
+    tmpfs: ["/tmp"]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: metabase
+      MB_DB_PORT: "5432"
+      MB_DB_USER: ${POSTGRES_USER}
+      MB_DB_PASS: ${POSTGRES_PASSWORD}
+      MB_DB_HOST: db
+      JAVA_OPTS: "-Xmx640m"
+      MB_PLUGINS_DIR: /tmp/plugins
+    mem_limit: 1g
+    restart: unless-stopped
+
+  bi-proxy:
+    <<: *hardening
+    image: caddy:2.11.7-alpine
+    profiles: ["bi"]
+    cap_add: ["NET_BIND_SERVICE"]  # o binário do Caddy carrega essa capacidade; sem ela o exec falha
+    depends_on:
+      metabase: {condition: service_started}
+    volumes:
+      - ./docker/caddy/bi.Caddyfile:/etc/caddy/Caddyfile:ro
+      - bi-hub:/hub:ro
+    tmpfs: ["/data", "/config"]
+    read_only: true
+    ports:
+      - "127.0.0.1:${BI_PORT:-3010}:8080"
+    mem_limit: 128m
+    restart: unless-stopped
+
+  bi-provision:
+    <<: *hardening
+    image: call-segmenter-api:local
+    profiles: ["bi-provision"]
+    entrypoint: ["python", "/app/tools/provision_metabase.py"]
+    user: "0"  # o volume do hub nasce de root; o job é curto, sem porta e sem capacidades
+    environment:
+      METABASE_URL: http://metabase:3000
+      POSTGRES_DB: ${POSTGRES_DB}
+      BI_PASSWORD: ${BI_PASSWORD}
+      METABASE_ADMIN_EMAIL: ${METABASE_ADMIN_EMAIL}
+      METABASE_ADMIN_PASSWORD: ${METABASE_ADMIN_PASSWORD}
+      HUB_DIR: /hub
+    volumes:
+      - ./tools:/app/tools:ro
+      - ./reports:/app/reports:ro
+      - bi-hub:/hub
+    mem_limit: 256m
+
+  mlflow:
+    <<: *hardening
+    build:
+      context: .
+      dockerfile: docker/mlflow-server.Dockerfile
+    image: call-segmenter-mlflow:local
+    profiles: ["mlops"]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    environment:
+      MLFLOW_BACKEND: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/mlflow
+      MLFLOW_ALLOWED_HOSTS: "localhost:*,127.0.0.1:*,mlflow:*,${MLFLOW_PUBLIC_HOST:-localhost}"
+      # o navegador envia Origin nos POST da interface; sem isto o MLflow responde 403 e os gráficos não carregam
+      MLFLOW_CORS_ORIGINS: "http://localhost:*,http://127.0.0.1:*,https://${MLFLOW_PUBLIC_HOST:-localhost}"
+    volumes:
+      - mlartifacts:/mlartifacts
+    tmpfs: ["/tmp"]
+    mem_limit: 1536m
+    restart: unless-stopped
+
+  mlflow-proxy:
+    <<: *hardening
+    image: caddy:2.11.7-alpine
+    profiles: ["mlops"]
+    cap_add: ["NET_BIND_SERVICE"]
+    depends_on:
+      mlflow: {condition: service_started}
+    environment:
+      MLFLOW_BASIC_USER: ${MLFLOW_BASIC_USER:-visitante}
+      MLFLOW_BASIC_HASH: ${MLFLOW_BASIC_HASH}
+    volumes:
+      - ./docker/caddy/mlflow.Caddyfile:/etc/caddy/Caddyfile:ro
+    tmpfs: ["/data", "/config"]
+    read_only: true
+    ports:
+      - "127.0.0.1:${MLFLOW_PORT:-5010}:8080"
+    mem_limit: 128m
+    restart: unless-stopped
+
+  mlflow-log:
+    build:
+      context: .
+      dockerfile: docker/mlflow-client.Dockerfile
+    image: call-segmenter-mlflow-client:local
+    profiles: ["mlops-log"]
+    entrypoint: ["callseg", "mlflow-log"]
+    working_dir: /srv
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
+    environment:
+      MLFLOW_TRACKING_URI: http://mlflow:5000
+      DATABASE_URL: *database-url
+    volumes:
+      - ./models:/srv/models:ro
+      - ./reports:/srv/reports:ro
+    mem_limit: 2g
+
+  airflow:
+    build:
+      context: .
+      dockerfile: docker/airflow.Dockerfile
+    image: call-segmenter-airflow:local
+    profiles: ["orchestration"]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    command: ["standalone"]
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/airflow
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "false"
+      AIRFLOW__WEBSERVER__BASE_URL: https://${MLFLOW_PUBLIC_HOST:-localhost}/airflow
+      AIRFLOW__WEBSERVER__ENABLE_PROXY_FIX: "True"
+      DATABASE_URL: *database-url
+      CALLSEG_DATA_DIR: /srv/data
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID:-}
+    working_dir: /srv
+    volumes:
+      - ./data:/srv/data:ro
+      - ./models:/srv/models
+      - ./airflow/dags:/opt/airflow/dags:ro
+    ports:
+      - "127.0.0.1:${AIRFLOW_PORT:-8080}:8080"
+    mem_limit: 2g
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  mlartifacts:
+  bi-hub:

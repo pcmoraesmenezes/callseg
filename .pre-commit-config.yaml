@@ -1,0 +1,13 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.9.10
+    hooks:
+      - id: ruff
+        args: [--fix]
+  - repo: local
+    hooks:
+      - id: sem-dados-nem-modelos
+        name: nenhum dado, modelo ou .env no commit
+        entry: sh -c '! git diff --cached --name-only | grep -E "^(data|models)/|(^|/)\.env$"'
+        language: system
+        pass_filenames: false

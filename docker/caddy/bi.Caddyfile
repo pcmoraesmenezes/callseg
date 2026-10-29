@@ -1,0 +1,27 @@
+{
+	auto_https off
+	admin off
+}
+
+# A página inicial e os atalhos curtos (/dados, /modelos, /operacao) vêm do volume preenchido pelo
+# provisionamento; todo o resto é o Metabase.
+:8080 {
+	handle / {
+		root * /hub
+		rewrite * /index.html
+		file_server
+	}
+	handle /hub-assets/* {
+		root * /hub
+		file_server
+	}
+	@shortcuts path /dados /modelos /operacao
+	handle @shortcuts {
+		root * /hub
+		rewrite * {path}/index.html
+		file_server
+	}
+	handle {
+		reverse_proxy metabase:3000
+	}
+}

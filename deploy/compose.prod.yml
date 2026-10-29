@@ -1,0 +1,19 @@
+# Sobreposição de produção: usa a imagem publicada no GHCR em vez de construir, e o modelo de um diretório do host.
+#   docker compose -f docker-compose.yml -f deploy/compose.prod.yml --profile bi up -d
+x-image: &image ghcr.io/${GHCR_OWNER:-pcmoraesmenezes}/call-segmenter:${TAG:?defina TAG com a versão da imagem}
+
+services:
+  migrate:
+    image: *image
+    build: !reset null
+  api:
+    image: *image
+    volumes: !override
+      - ${MODELS_DIR:?defina MODELS_DIR com o diretório do modelo}:/models:ro
+  pipeline:
+    image: *image
+    volumes: !override
+      - ${DATA_DIR:?defina DATA_DIR}:/srv/data:ro
+      - ${MODELS_DIR}:/srv/models
+  bi-provision:
+    image: *image

@@ -1,0 +1,1028 @@
+{
+ "dados": {
+  "arquivos": 10288,
+  "arquivos_vazios": 2,
+  "chamadas": 10121,
+  "arquivos_repetidos_removidos": 167,
+  "por_setor": {
+   "home_service": 4196,
+   "medicare": 3114,
+   "automotive": 2811
+  },
+  "palavras_mediana": {
+   "automotive": 783.0,
+   "home_service": 472.0,
+   "medicare": 554.0
+  },
+  "confianca_mediana": {
+   "automotive": 0.95,
+   "home_service": 0.887,
+   "medicare": 0.883
+  },
+  "textos_identicos_com_ids_diferentes": 20
+ },
+ "vazamento": {
+  "0. referência (texto completo)": 0.9935,
+  "1a. divisão por arquivo (cópias soltas)": 0.9929,
+  "1b. divisão por chamada": 0.9935,
+  "2. só metadados": 0.7108,
+  "2b. só confiança da transcrição": 0.6427,
+  "2c. só duração": 0.4237,
+  "3. sem marcadores [TAG]": 0.9932,
+  "4a. só as primeiras 60 palavras": 0.9541,
+  "4b. só as últimas 60 palavras": 0.8165,
+  "4c. sem as primeiras 60 palavras": 0.9837,
+  "5. rótulos embaralhados": 0.3307
+ },
+ "vazamento_inflacao_copias": -0.0006,
+ "setor": {
+  "escolhido": "SVM linear calibrado",
+  "chamadas_desenvolvimento": 8094,
+  "chamadas_teste": 2027,
+  "validacao_cruzada_referencia": {
+   "f1_macro": 0.9935453818055302,
+   "desvio": 0.001476841499061899
+  },
+  "familias_validacao_cruzada": [
+   {
+    "modelo": "Ridge (alpha=1)",
+    "F1 validação": 0.9937914645,
+    "desvio": 0.0013345164,
+    "F1 treino": 0.9997960451,
+    "segundos por ajuste": 1.0517333984,
+    "distância treino - validação": 0.0060045807
+   },
+   {
+    "modelo": "SVM linear (C=5)",
+    "F1 validação": 0.9935650366,
+    "desvio": 0.0013833416,
+    "F1 treino": 1.0,
+    "segundos por ajuste": 1.0152114391,
+    "distância treino - validação": 0.0064349634
+   },
+   {
+    "modelo": "SVM linear (C=0.5)",
+    "F1 validação": 0.9926433253,
+    "desvio": 0.0025197231,
+    "F1 treino": 0.9997668477,
+    "segundos por ajuste": 0.3795300961,
+    "distância treino - validação": 0.0071235224
+   },
+   {
+    "modelo": "Regressão logística (C=100)",
+    "F1 validação": 0.9924956477,
+    "desvio": 0.0035542856,
+    "F1 treino": 1.0,
+    "segundos por ajuste": 5.0945625782,
+    "distância treino - validação": 0.0075043523
+   },
+   {
+    "modelo": "SGD (perda modified_huber)",
+    "F1 validação": 0.9919960768,
+    "desvio": 0.0038419709,
+    "F1 treino": 1.0,
+    "segundos por ajuste": 0.1860544682,
+    "distância treino - validação": 0.0080039232
+   },
+   {
+    "modelo": "Regressão logística (C=5)",
+    "F1 validação": 0.9909241248,
+    "desvio": 0.0032121699,
+    "F1 treino": 0.9998251887,
+    "segundos por ajuste": 5.5256090641,
+    "distância treino - validação": 0.0089010638
+   },
+   {
+    "modelo": "Naive Bayes complementar (alpha=0.3)",
+    "F1 validação": 0.9834738061,
+    "desvio": 0.00158071,
+    "F1 treino": 0.9929005987,
+    "segundos por ajuste": 0.028396368,
+    "distância treino - validação": 0.0094267926
+   }
+  ],
+  "teste": {
+   "melhor da busca aleatória": {
+    "F1 macro": 0.9930597971501017,
+    "erros": 14,
+    "acurácia": 0.9930932412432166,
+    "ECE": 0.00771095645809638,
+    "perda logarítmica": 0.03002613855499412
+   },
+   "SVM linear calibrado": {
+    "F1 macro": 0.992099790899054,
+    "erros": 16,
+    "acurácia": 0.992106561420819,
+    "ECE": 0.006522748838250041,
+    "perda logarítmica": 0.0330823370772063
+   },
+   "regressão logística": {
+    "F1 macro": 0.9915312546925902,
+    "erros": 17,
+    "acurácia": 0.9916132215096202,
+    "ECE": 0.05014681171137711,
+    "perda logarítmica": 0.07717121638613801
+   },
+   "combinação (pesos iguais)": {
+    "F1 macro": 0.9914569617716126,
+    "erros": 17,
+    "acurácia": 0.9916132215096202,
+    "ECE": 0.032860039957706935,
+    "perda logarítmica": 0.0586434547582002
+   },
+   "Naive Bayes complementar": {
+    "F1 macro": 0.9842175348043102,
+    "erros": 31,
+    "acurácia": 0.9847064627528367,
+    "ECE": 0.028547986225396567,
+    "perda logarítmica": 0.07475784245367327
+   },
+   "MiniLM + regressão logística": {
+    "F1 macro": 0.976580550115182,
+    "erros": 47,
+    "acurácia": 0.9768130241736557,
+    "ECE": 0.015365939949813444,
+    "perda logarítmica": 0.08018242742708664
+   },
+   "DistilBERT com ajuste fino": {
+    "F1 macro": 0.9643421351365368,
+    "erros": 68,
+    "acurácia": 0.9664528860384806,
+    "ECE": 0.011843053516520652,
+    "perda logarítmica": 0.10992925725687006
+   }
+  },
+  "ic95_f1_macro": [
+   0.9882500031644774,
+   0.9955554057274446
+  ],
+  "mcnemar_contra_svm_calibrado": [
+   {
+    "comparado com SVM linear calibrado": "regressão logística",
+    "só o SVM erra": 0,
+    "só o outro erra": 1,
+    "p (McNemar)": 1.0
+   },
+   {
+    "comparado com SVM linear calibrado": "Naive Bayes complementar",
+    "só o SVM erra": 2,
+    "só o outro erra": 17,
+    "p (McNemar)": 0.0007286072
+   },
+   {
+    "comparado com SVM linear calibrado": "MiniLM + regressão logística",
+    "só o SVM erra": 5,
+    "só o outro erra": 36,
+    "p (McNemar)": 7.842e-07
+   },
+   {
+    "comparado com SVM linear calibrado": "melhor da busca aleatória",
+    "só o SVM erra": 2,
+    "só o outro erra": 0,
+    "p (McNemar)": 0.5
+   },
+   {
+    "comparado com SVM linear calibrado": "combinação (pesos iguais)",
+    "só o SVM erra": 2,
+    "só o outro erra": 3,
+    "p (McNemar)": 1.0
+   },
+   {
+    "comparado com SVM linear calibrado": "DistilBERT com ajuste fino",
+    "só o SVM erra": 7,
+    "só o outro erra": 59,
+    "p (McNemar)": 0.0
+   }
+  ],
+  "busca_hiperparametros": {
+   "grade": {
+    "combinacoes": 12,
+    "melhor_f1": 0.9938163110342154,
+    "pior_f1": 0.9884684311145795,
+    "minutos": 2.2212916294733684
+   },
+   "aleatoria_mesmo_orcamento": {
+    "combinacoes": 12,
+    "melhor_f1": 0.9930280525444619,
+    "pior_f1": 0.9733931232900872,
+    "minutos": 3.7020790537198383
+   },
+   "aleatoria_ampla": {
+    "combinacoes": 40,
+    "minutos": 15.204385912418365,
+    "melhor_por_familia": {
+     "RidgeClassifier": 0.994172073498469,
+     "LinearSVC": 0.9938162203333472,
+     "SGDClassifier": 0.9934805051859842,
+     "LogisticRegression": 0.991992876166151,
+     "ComplementNB": 0.9854499632449446
+    }
+   }
+  },
+  "diagnostico_de_ajuste": {
+   "curva_de_validacao": [
+    {
+     "C": 0.01,
+     "treino": 0.9722255297,
+     "validação": 0.9642127136,
+     "desvio da validação": 0.0071383769
+    },
+    {
+     "C": 0.03,
+     "treino": 0.9888648785,
+     "validação": 0.9803811516,
+     "desvio da validação": 0.0031539737
+    },
+    {
+     "C": 0.1,
+     "treino": 0.9967989107,
+     "validação": 0.9892464021,
+     "desvio da validação": 0.0026063176
+    },
+    {
+     "C": 0.3,
+     "treino": 0.9995627168,
+     "validação": 0.992245639,
+     "desvio da validação": 0.0031464076
+    },
+    {
+     "C": 1.0,
+     "treino": 1.0,
+     "validação": 0.9935453818,
+     "desvio da validação": 0.001651159
+    },
+    {
+     "C": 3.0,
+     "treino": 1.0,
+     "validação": 0.9935449558,
+     "desvio da validação": 0.0013705297
+    },
+    {
+     "C": 10.0,
+     "treino": 1.0,
+     "validação": 0.9935650366,
+     "desvio da validação": 0.0013833416
+    },
+    {
+     "C": 30.0,
+     "treino": 1.0,
+     "validação": 0.9935875639,
+     "desvio da validação": 0.0013931494
+    },
+    {
+     "C": 100.0,
+     "treino": 1.0,
+     "validação": 0.9935875639,
+     "desvio da validação": 0.0013931494
+    }
+   ],
+   "curva_de_aprendizado": {
+    "chamadas": [
+     647,
+     1295,
+     2266,
+     3237,
+     4856,
+     6475
+    ],
+    "treino": [
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "validacao": [
+     0.943789659603971,
+     0.9255419315602211,
+     0.941902311949496,
+     0.9597656819188056,
+     0.9893834717453569,
+     0.9935453818055302
+    ]
+   }
+  },
+  "limiar_baixa_confianca": {
+   "escolhido": 0.9,
+   "orcamento_de_chamadas_marcadas": 0.06,
+   "tabela": [
+    {
+     "limiar": 0.5,
+     "chamadas marcadas": 0.0002470966,
+     "erros capturados": 0.0172413793,
+     "precisão do aviso": 0.5
+    },
+    {
+     "limiar": 0.6,
+     "chamadas marcadas": 0.0044477391,
+     "erros capturados": 0.2931034483,
+     "precisão do aviso": 0.4722222222
+    },
+    {
+     "limiar": 0.7,
+     "chamadas marcadas": 0.0111193477,
+     "erros capturados": 0.4137931034,
+     "precisão do aviso": 0.2666666667
+    },
+    {
+     "limiar": 0.8,
+     "chamadas marcadas": 0.0182851495,
+     "erros capturados": 0.5862068966,
+     "precisão do aviso": 0.2297297297
+    },
+    {
+     "limiar": 0.85,
+     "chamadas marcadas": 0.0277983692,
+     "erros capturados": 0.724137931,
+     "precisão do aviso": 0.1866666667
+    },
+    {
+     "limiar": 0.9,
+     "chamadas marcadas": 0.0412651347,
+     "erros capturados": 0.8275862069,
+     "precisão do aviso": 0.1437125749
+    },
+    {
+     "limiar": 0.95,
+     "chamadas marcadas": 0.0647393131,
+     "erros capturados": 0.9137931034,
+     "precisão do aviso": 0.1011450382
+    },
+    {
+     "limiar": 0.98,
+     "chamadas marcadas": 0.122189276,
+     "erros capturados": 0.9310344828,
+     "precisão do aviso": 0.0546006067
+    }
+   ],
+   "teste": {
+    "marcadas": 0.0370004933399112,
+    "erros_capturados": 12,
+    "erros": 16
+   }
+  },
+  "palavras_necessarias": {
+   "20": 0.8606640221678885,
+   "40": 0.9314690368609089,
+   "80": 0.9632288630708523,
+   "160": 0.9818629898634382,
+   "320": 0.9902097729955412,
+   "640": 0.9925757615607187,
+   "todas": 0.9935453818055302
+  },
+  "termos_que_pesam": {
+   "automotive": [
+    "car",
+    "vehicle",
+    "bye bye",
+    "gonna",
+    "the car",
+    "the vehicle",
+    "dealership",
+    "organization press",
+    "date_interval",
+    "oil",
+    "for organization",
+    "drive"
+   ],
+   "home_service": [
+    "glass",
+    "windshield",
+    "window",
+    "quote",
+    "come out",
+    "location",
+    "location location",
+    "fix",
+    "fix your",
+    "pains",
+    "house",
+    "your pains"
+   ],
+   "medicare": [
+    "medical_process",
+    "patient",
+    "dog",
+    "medical_condition",
+    "for language",
+    "medical_process medical_process",
+    "birth",
+    "pet",
+    "date",
+    "date of",
+    "of birth",
+    "insurance"
+   ]
+  },
+  "modelos_pre_treinados": {
+   "distilbert_f1_primeira_dobra": 0.9474632130867965,
+   "svm_f1_primeira_dobra": 0.9907939694125089,
+   "minilm_f1_validacao_cruzada": 0.9720210855506795,
+   "distilbert_minutos_de_ajuste": 30.966654654343923
+  },
+  "detectores_por_setor": [
+   {
+    "detectores positivos": "nenhum",
+    "chamadas": 116,
+    "acerto do maior escore": 0.7844827586
+   },
+   {
+    "detectores positivos": "exatamente um",
+    "chamadas": 7976,
+    "acerto do maior escore": 0.9967402207
+   },
+   {
+    "detectores positivos": "dois ou mais",
+    "chamadas": 2,
+    "acerto do maior escore": 0.5
+   }
+  ]
+ },
+ "subgrupos": {
+  "k": {
+   "automotive": 6,
+   "home_service": 8,
+   "medicare": 7
+  },
+  "escolha_de_k": [
+   {
+    "setor": "automotive",
+    "k": 2,
+    "silhueta": 0.0441195503,
+    "estabilidade": 0.9258231147,
+    "menor grupo": 0.4334516415
+   },
+   {
+    "setor": "automotive",
+    "k": 3,
+    "silhueta": 0.015717964,
+    "estabilidade": 0.9048778678,
+    "menor grupo": 0.3087843833
+   },
+   {
+    "setor": "automotive",
+    "k": 4,
+    "silhueta": 0.0193592532,
+    "estabilidade": 0.644103574,
+    "menor grupo": 0.0776397516
+   },
+   {
+    "setor": "automotive",
+    "k": 5,
+    "silhueta": 0.022183309,
+    "estabilidade": 0.5414596519,
+    "menor grupo": 0.0740905058
+   },
+   {
+    "setor": "automotive",
+    "k": 6,
+    "silhueta": 0.0219826132,
+    "estabilidade": 0.5980902366,
+    "menor grupo": 0.07054126
+   },
+   {
+    "setor": "automotive",
+    "k": 7,
+    "silhueta": 0.0198331832,
+    "estabilidade": 0.5138122314,
+    "menor grupo": 0.0696539485
+   },
+   {
+    "setor": "automotive",
+    "k": 8,
+    "silhueta": 0.0238482466,
+    "estabilidade": 0.4956754641,
+    "menor grupo": 0.0399290151
+   },
+   {
+    "setor": "automotive",
+    "k": 9,
+    "silhueta": 0.0264624496,
+    "estabilidade": 0.5390584041,
+    "menor grupo": 0.0390417036
+   },
+   {
+    "setor": "automotive",
+    "k": 10,
+    "silhueta": 0.0266268137,
+    "estabilidade": 0.5878743559,
+    "menor grupo": 0.0377107365
+   },
+   {
+    "setor": "automotive",
+    "k": 11,
+    "silhueta": 0.0310361209,
+    "estabilidade": 0.5202765538,
+    "menor grupo": 0.033717835
+   },
+   {
+    "setor": "automotive",
+    "k": 12,
+    "silhueta": 0.0343047801,
+    "estabilidade": 0.6281260561,
+    "menor grupo": 0.0110913931
+   },
+   {
+    "setor": "home_service",
+    "k": 2,
+    "silhueta": 0.0618569038,
+    "estabilidade": 0.9887452429,
+    "menor grupo": 0.3561602871
+   },
+   {
+    "setor": "home_service",
+    "k": 3,
+    "silhueta": 0.055427541,
+    "estabilidade": 0.7328746339,
+    "menor grupo": 0.2203947368
+   },
+   {
+    "setor": "home_service",
+    "k": 4,
+    "silhueta": 0.0569092425,
+    "estabilidade": 0.7166773539,
+    "menor grupo": 0.0627990431
+   },
+   {
+    "setor": "home_service",
+    "k": 5,
+    "silhueta": 0.056849513,
+    "estabilidade": 0.6122600915,
+    "menor grupo": 0.0355861244
+   },
+   {
+    "setor": "home_service",
+    "k": 6,
+    "silhueta": 0.0621762294,
+    "estabilidade": 0.5468689623,
+    "menor grupo": 0.0352870813
+   },
+   {
+    "setor": "home_service",
+    "k": 7,
+    "silhueta": 0.0661936633,
+    "estabilidade": 0.7063499571,
+    "menor grupo": 0.0355861244
+   },
+   {
+    "setor": "home_service",
+    "k": 8,
+    "silhueta": 0.0720460217,
+    "estabilidade": 0.659864667,
+    "menor grupo": 0.0352870813
+   },
+   {
+    "setor": "home_service",
+    "k": 9,
+    "silhueta": 0.078278615,
+    "estabilidade": 0.6775251496,
+    "menor grupo": 0.0233253589
+   },
+   {
+    "setor": "home_service",
+    "k": 10,
+    "silhueta": 0.0778705104,
+    "estabilidade": 0.7017250592,
+    "menor grupo": 0.0233253589
+   },
+   {
+    "setor": "home_service",
+    "k": 11,
+    "silhueta": 0.0793655713,
+    "estabilidade": 0.6605991724,
+    "menor grupo": 0.0319976077
+   },
+   {
+    "setor": "home_service",
+    "k": 12,
+    "silhueta": 0.086111939,
+    "estabilidade": 0.5524472619,
+    "menor grupo": 0.0233253589
+   },
+   {
+    "setor": "medicare",
+    "k": 2,
+    "silhueta": 0.0430551482,
+    "estabilidade": 0.737911141,
+    "menor grupo": 0.4739583333
+   },
+   {
+    "setor": "medicare",
+    "k": 3,
+    "silhueta": 0.037929694,
+    "estabilidade": 0.5426607655,
+    "menor grupo": 0.2592147436
+   },
+   {
+    "setor": "medicare",
+    "k": 4,
+    "silhueta": 0.0395525582,
+    "estabilidade": 0.6722511285,
+    "menor grupo": 0.1081730769
+   },
+   {
+    "setor": "medicare",
+    "k": 5,
+    "silhueta": 0.0350993302,
+    "estabilidade": 0.7167011574,
+    "menor grupo": 0.1033653846
+   },
+   {
+    "setor": "medicare",
+    "k": 6,
+    "silhueta": 0.0329991694,
+    "estabilidade": 0.5376605365,
+    "menor grupo": 0.0841346154
+   },
+   {
+    "setor": "medicare",
+    "k": 7,
+    "silhueta": 0.0348124544,
+    "estabilidade": 0.6247012419,
+    "menor grupo": 0.0845352564
+   },
+   {
+    "setor": "medicare",
+    "k": 8,
+    "silhueta": 0.041458477,
+    "estabilidade": 0.617774671,
+    "menor grupo": 0.0248397436
+   },
+   {
+    "setor": "medicare",
+    "k": 9,
+    "silhueta": 0.0406207151,
+    "estabilidade": 0.5942252659,
+    "menor grupo": 0.0484775641
+   },
+   {
+    "setor": "medicare",
+    "k": 10,
+    "silhueta": 0.0461463652,
+    "estabilidade": 0.5132594518,
+    "menor grupo": 0.0248397436
+   },
+   {
+    "setor": "medicare",
+    "k": 11,
+    "silhueta": 0.0463974595,
+    "estabilidade": 0.450768741,
+    "menor grupo": 0.0340544872
+   },
+   {
+    "setor": "medicare",
+    "k": 12,
+    "silhueta": 0.0488757906,
+    "estabilidade": 0.5664038977,
+    "menor grupo": 0.0248397436
+   }
+  ],
+  "algoritmos": [
+   {
+    "setor": "automotive",
+    "algoritmo": "KMeans",
+    "grupos": 6,
+    "chamadas como ruído": 0.0,
+    "silhueta": 0.0219826132,
+    "estabilidade": 0.5980902366,
+    "concordância com KMeans (ARI)": 1.0
+   },
+   {
+    "setor": "automotive",
+    "algoritmo": "Hierárquico (Ward)",
+    "grupos": 6,
+    "chamadas como ruído": 0.0,
+    "silhueta": 0.0137538692,
+    "estabilidade": 0.3346752155,
+    "concordância com KMeans (ARI)": 0.2957050207
+   },
+   {
+    "setor": "automotive",
+    "algoritmo": "Mistura de gaussianas",
+    "grupos": 6,
+    "chamadas como ruído": 0.0,
+    "silhueta": 0.0123007411,
+    "estabilidade": 0.5550701962,
+    "concordância com KMeans (ARI)": 0.3618402792
+   },
+   {
+    "setor": "automotive",
+    "algoritmo": "DBSCAN",
+    "grupos": 4,
+    "chamadas como ruído": 0.9773735581,
+    "silhueta": 0.5428792899,
+    "estabilidade": 0.3755938431,
+    "concordância com KMeans (ARI)": 0.0042667154
+   },
+   {
+    "setor": "automotive",
+    "algoritmo": "NMF",
+    "grupos": 6,
+    "chamadas como ruído": 0.0,
+    "silhueta": 0.0425419994,
+    "estabilidade": 0.6775199116,
+    "concordância com KMeans (ARI)": 0.3186013282
+   },
+   {
+    "setor": "home_service",
+    "algoritmo": "KMeans",
+    "grupos": 8,
+    "chamadas como ruído": 0.0,
+    "silhueta": 0.0720460217,
+    "estabilidade": 0.659864667,
+    "concordância com KMeans (ARI)": 1.0
+   },
+   {
+    "setor": "home_service",
+    "algoritmo": "Hierárquico (Ward)",
+    "grupos": 8,
+    "chamadas como ruído": 0.0,
+    "silhueta": 0.060485108,
+    "estabilidade": 0.6529492199,
+    "concordância com KMeans (ARI)": 0.4826627236
+   },
+   {
+    "setor": "home_service",
+    "algoritmo": "Mistura de gaussianas",
+    "grupos": 8,
+    "chamadas como ruído": 0.0,
+    "silhueta": 0.0491331689,
+    "estabilidade": 0.4939487353,
+    "concordância com KMeans (ARI)": 0.3982197466
+   },
+   {
+    "setor": "home_service",
+    "algoritmo": "DBSCAN",
+    "grupos": 43,
+    "chamadas como ruído": 0.5592105263,
+    "silhueta": 0.321175222,
+    "estabilidade": 0.8434052349,
+    "concordância com KMeans (ARI)": 0.1267049174
+   },
+   {
+    "setor": "home_service",
+    "algoritmo": "NMF",
+    "grupos": 8,
+    "chamadas como ruído": 0.0,
+    "silhueta": 0.0683916704,
+    "estabilidade": 0.6163915001,
+    "concordância com KMeans (ARI)": 0.6355251229
+   },
+   {
+    "setor": "medicare",
+    "algoritmo": "KMeans",
+    "grupos": 7,
+    "chamadas como ruído": 0.0,
+    "silhueta": 0.0348124544,
+    "estabilidade": 0.6247012419,
+    "concordância com KMeans (ARI)": 1.0
+   },
+   {
+    "setor": "medicare",
+    "algoritmo": "Hierárquico (Ward)",
+    "grupos": 7,
+    "chamadas como ruído": 0.0,
+    "silhueta": 0.024613417,
+    "estabilidade": 0.4212430459,
+    "concordância com KMeans (ARI)": 0.2627262958
+   },
+   {
+    "setor": "medicare",
+    "algoritmo": "Mistura de gaussianas",
+    "grupos": 7,
+    "chamadas como ruído": 0.0,
+    "silhueta": 0.0260322478,
+    "estabilidade": 0.3395904646,
+    "concordância com KMeans (ARI)": 0.2883083384
+   },
+   {
+    "setor": "medicare",
+    "algoritmo": "DBSCAN",
+    "grupos": 13,
+    "chamadas como ruído": 0.8898237179,
+    "silhueta": 0.4876508102,
+    "estabilidade": 0.8998570014,
+    "concordância com KMeans (ARI)": 0.0033981444
+   },
+   {
+    "setor": "medicare",
+    "algoritmo": "NMF",
+    "grupos": 7,
+    "chamadas como ruído": 0.0,
+    "silhueta": 0.0510743711,
+    "estabilidade": 0.749806107,
+    "concordância com KMeans (ARI)": 0.326963539
+   }
+  ],
+  "vizinhanca": [
+   {
+    "setor": "automotive",
+    "pureza média de vizinhança": 0.6501774622892635,
+    "pureza do grupo mais fraco": 0.4511754068716094,
+    "chamadas de teste: centro e vizinhos concordam": 0.6983842010771992
+   },
+   {
+    "setor": "home_service",
+    "pureza média de vizinhança": 0.8480562200956938,
+    "pureza do grupo mais fraco": 0.7990839694656489,
+    "chamadas de teste: centro e vizinhos concordam": 0.92018779342723
+   },
+   {
+    "setor": "medicare",
+    "pureza média de vizinhança": 0.7259615384615384,
+    "pureza do grupo mais fraco": 0.6623126338329764,
+    "chamadas de teste: centro e vizinhos concordam": 0.8414239482200647
+   }
+  ],
+  "embeddings": [
+   {
+    "setor": "automotive",
+    "k": 6,
+    "ARI entre TF-IDF e embedding": 0.2001308343,
+    "estabilidade TF-IDF": 0.5980902366,
+    "estabilidade embedding": 0.7709269238,
+    "vizinhos em comum (de 10)": 1.1472937001
+   },
+   {
+    "setor": "home_service",
+    "k": 8,
+    "ARI entre TF-IDF e embedding": 0.2790013714,
+    "estabilidade TF-IDF": 0.659864667,
+    "estabilidade embedding": 0.7909833494,
+    "vizinhos em comum (de 10)": 1.2541866029
+   },
+   {
+    "setor": "medicare",
+    "k": 7,
+    "ARI entre TF-IDF e embedding": 0.1720603679,
+    "estabilidade TF-IDF": 0.6247012419,
+    "estabilidade embedding": 0.5668473525,
+    "vizinhos em comum (de 10)": 1.3741987179
+   }
+  ],
+  "temas_por_grupo": {
+   "automotive": {
+    "0": {
+     "VIN/estoque": 13.3,
+     "financiamento": 38.5,
+     "serviço": 80.9,
+     "URA": 32.1,
+     "veículo usado": 47.4
+    },
+    "1": {
+     "VIN/estoque": 27.0,
+     "financiamento": 89.0,
+     "serviço": 39.7,
+     "URA": 17.6,
+     "veículo usado": 73.2
+    },
+    "2": {
+     "VIN/estoque": 29.9,
+     "financiamento": 59.5,
+     "serviço": 31.9,
+     "URA": 14.3,
+     "veículo usado": 89.6
+    },
+    "3": {
+     "VIN/estoque": 90.6,
+     "financiamento": 43.4,
+     "serviço": 36.5,
+     "URA": 21.4,
+     "veículo usado": 58.5
+    },
+    "4": {
+     "VIN/estoque": 25.5,
+     "financiamento": 45.2,
+     "serviço": 31.3,
+     "URA": 10.5,
+     "veículo usado": 51.0
+    },
+    "5": {
+     "VIN/estoque": 16.7,
+     "financiamento": 28.2,
+     "serviço": 56.8,
+     "URA": 99.0,
+     "veículo usado": 38.7
+    }
+   },
+   "home_service": {
+    "0": {
+     "vidro": 2.5,
+     "fauna": 100.0,
+     "pesquisa": 1.7,
+     "agenda": 59.3,
+     "para-brisa": 2.5,
+     "hidráulica/telhado": 6.8
+    },
+    "1": {
+     "vidro": 26.1,
+     "fauna": 10.7,
+     "pesquisa": 0.8,
+     "agenda": 63.1,
+     "para-brisa": 9.2,
+     "hidráulica/telhado": 11.3
+    },
+    "2": {
+     "vidro": 100.0,
+     "fauna": 0.5,
+     "pesquisa": 0.0,
+     "agenda": 46.8,
+     "para-brisa": 51.1,
+     "hidráulica/telhado": 5.8
+    },
+    "3": {
+     "vidro": 95.2,
+     "fauna": 0.4,
+     "pesquisa": 0.2,
+     "agenda": 54.8,
+     "para-brisa": 10.5,
+     "hidráulica/telhado": 2.7
+    },
+    "4": {
+     "vidro": 8.2,
+     "fauna": 0.4,
+     "pesquisa": 100.0,
+     "agenda": 74.7,
+     "para-brisa": 1.3,
+     "hidráulica/telhado": 9.9
+    },
+    "5": {
+     "vidro": 79.6,
+     "fauna": 0.0,
+     "pesquisa": 0.9,
+     "agenda": 52.3,
+     "para-brisa": 88.2,
+     "hidráulica/telhado": 4.0
+    },
+    "6": {
+     "vidro": 5.5,
+     "fauna": 0.2,
+     "pesquisa": 42.9,
+     "agenda": 52.4,
+     "para-brisa": 1.3,
+     "hidráulica/telhado": 8.1
+    },
+    "7": {
+     "vidro": 8.6,
+     "fauna": 0.0,
+     "pesquisa": 71.9,
+     "agenda": 93.2,
+     "para-brisa": 1.7,
+     "hidráulica/telhado": 7.2
+    }
+   },
+   "medicare": {
+    "0": {
+     "pet": 1.8,
+     "odonto": 49.8,
+     "convênio": 95.9,
+     "URA": 29.5,
+     "data de nascimento": 71.0
+    },
+    "1": {
+     "pet": 96.7,
+     "odonto": 2.8,
+     "convênio": 0.0,
+     "URA": 6.6,
+     "data de nascimento": 4.3
+    },
+    "2": {
+     "pet": 50.0,
+     "odonto": 19.2,
+     "convênio": 20.4,
+     "URA": 61.9,
+     "data de nascimento": 21.8
+    },
+    "3": {
+     "pet": 4.9,
+     "odonto": 35.3,
+     "convênio": 36.2,
+     "URA": 18.2,
+     "data de nascimento": 37.9
+    },
+    "4": {
+     "pet": 41.5,
+     "odonto": 27.3,
+     "convênio": 25.8,
+     "URA": 14.9,
+     "data de nascimento": 12.3
+    },
+    "5": {
+     "pet": 95.2,
+     "odonto": 6.6,
+     "convênio": 0.4,
+     "URA": 20.4,
+     "data de nascimento": 6.6
+    },
+    "6": {
+     "pet": 0.9,
+     "odonto": 24.6,
+     "convênio": 34.6,
+     "URA": 32.9,
+     "data de nascimento": 67.5
+    }
+   }
+  }
+ }
+}

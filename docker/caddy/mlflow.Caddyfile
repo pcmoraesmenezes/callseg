@@ -1,0 +1,17 @@
+{
+	auto_https off
+	admin off
+}
+
+# Um proxy com senha para as ferramentas internas: o Airflow fica em /airflow/ e o resto é o MLflow.
+:8080 {
+	basic_auth {
+		{$MLFLOW_BASIC_USER} {$MLFLOW_BASIC_HASH}
+	}
+	handle /airflow* {
+		reverse_proxy airflow:8080
+	}
+	handle {
+		reverse_proxy mlflow:5000
+	}
+}
