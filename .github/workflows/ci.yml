@@ -48,9 +48,9 @@ jobs:
             -d '{"text": "dog pet boarding grooming daycare vaccine puppy suite reservation leash"}' | tee out.json
           python3 -c "import json; assert json.load(open('out.json'))['sector'] == 'medicare'"
           sleep 2
-          docker compose exec -T db sh -c 'PGPASSWORD="$BI_PASSWORD" psql -U bi_reader -d "$POSTGRES_DB" -c "DELETE FROM ops.predictions"' 2>&1 | grep -q "permission denied"
-          docker compose exec -T db sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -tAc "SELECT count(*) FROM ops.predictions WHERE source = '"'"'api'"'"'"' | grep -qx 1
-          docker compose exec -T db sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -tAc "SELECT count(*) FROM information_schema.tables WHERE table_type = '"'"'BASE TABLE'"'"' AND table_schema IN ('"'"'bronze'"'"', '"'"'silver'"'"', '"'"'gold'"'"', '"'"'ops'"'"')"' | grep -qx 12
+          docker compose exec -T db sh -c 'PGPASSWORD="$BI_PASSWORD" psql -U bi_reader -d "$POSTGRES_DB" -c "DELETE FROM ops.predictions"' 2>&1 | grep "permission denied" > /dev/null
+          docker compose exec -T db sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -tAc "SELECT count(*) FROM ops.predictions WHERE source = '"'"'api'"'"'"' | grep -x 1 > /dev/null
+          docker compose exec -T db sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -tAc "SELECT count(*) FROM information_schema.tables WHERE table_type = '"'"'BASE TABLE'"'"' AND table_schema IN ('"'"'bronze'"'"', '"'"'silver'"'"', '"'"'gold'"'"', '"'"'ops'"'"')"' | grep -x 12 > /dev/null
       - name: Consulta de deriva roda no PostgreSQL de verdade
         run: |
           docker compose exec -T api python -c "import os; from call_segmenter.warehouse import PredictionRepository, create_db_engine, create_session_factory; print(PredictionRepository(create_session_factory(create_db_engine(os.environ['DATABASE_URL']))).window(60))"
